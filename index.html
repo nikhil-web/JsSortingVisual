@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+    <script src="./jquery.js"></script>
+</head>
+<body>
+
+    <button id="startSorting">Start sorting</button>
+
+    <button id="randomize">Randomize</button>
+
+    <input type="number" id="iterations" value="50">
+    <div class="barRow">
+
+        
+
+    </div>
+
+
+    <script>
+        var s = window.screen;
+        var iterations;
+        var arr =[];
+        $("#randomize").click( () => {
+            iterations = parseInt($("#iterations").val());
+            
+            
+            width = s.availWidth / iterations;
+            arr =[];
+            for (let index = 0; index < iterations; index++) {
+            
+            var height = Math.floor((Math.random() * 700) + 1);
+            arr.push(height);
+        }
+
+            makeGraph(0)
+
+        });
+       
+
+       
+
+
+
+      
+myIntarval
+
+    var min = 0;
+    var  i = 0;    
+    var myIntarval;
+
+        $("#startSorting").click( async function  MainSorter(e){
+            e.preventDefault();
+            startSorting();
+        });
+
+
+        function startSorting() {
+            i=0
+          myIntarval = setInterval(() => {
+                somthin(i++);
+            }, 5);
+
+
+
+
+        }
+
+
+        function somthin(i){
+    //set min to the current iteration of i
+    var min = i;
+    for(var j = i+1; j < arr.length; j++){
+      if(arr[j] < arr[min]){
+       min = j;
+      }
+    }
+    var temp = arr[i];
+    arr[i] = arr[min];
+    arr[min] = temp;
+    makeGraph(i+1,min);
+
+    if(i>iterations){
+        clearInterval(myIntarval);
+    }
+}
+
+        function makeGraph(current,min){
+            $(".barRow").empty(0);
+    for (let i = 0; i < arr.length; i++) {
+        if(i == current){
+            $(".barRow").append('<div class="bar" style="width:'+width+'px;height:'+arr[i]+'px;background: red;"></div>');
+
+        }else if(i == min){
+            $(".barRow").append('<div class="bar" style="width:'+width+'px;height:'+arr[i]+'px;background: green;"></div>');
+        }else{
+            $(".barRow").append('<div class="bar" style="width:'+width+'px;height:'+arr[i]+'px;"></div>');
+        }
+        }
+}
+
+
+const sleep = (milliseconds) => {
+  return new Promise(resolve => setTimeout(resolve, milliseconds))
+}
+    </script>
+
+
+</body>
+</html>
